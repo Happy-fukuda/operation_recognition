@@ -23,7 +23,7 @@ class ShakeHandRecognition():
        self.hand_pos={}
        self.error_cnt=error_max+1
        self.shake_person=int()
-
+       rospy.spin()
 
    def shakeRecognision(self,receive_msg):
        #0body 1hand 2legs
