@@ -17,6 +17,7 @@ max_angle_data=20
 error_max=3
 class ShakeHandRecognition():
    def __init__(self):
+       rospy.init_node("test_openpose",anonymous=False)
        #Subscriber
        rospy.Subscriber('/visualization', MarkerArray, self.shakeRecognision)
        self.flag = False
