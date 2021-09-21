@@ -44,7 +44,7 @@ class ShakeHandRecognition():
             {12,      "LHip"},    {25, "Background"}
         hands_ids = [4, 3, 2, 1, 5, 6, 7]
         '''
-       print(receive_msg.markers[1].pose)
+       print(receive_msg.markers[1])
       # if(not receive_msg[-1].text):
        #    self.error_cnt=0
 
