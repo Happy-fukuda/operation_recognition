@@ -45,7 +45,8 @@ class ShakeHandRecognition():
         hands_ids = [4, 3, 2, 1, 5, 6, 7]
         '''
        print(receive_msg.markers[1])
-      # if(not receive_msg[-1].text):
+       print(len(receive_msg.markers[1].points))
+    # if(not receive_msg[-1].text):
        #    self.error_cnt=0
 
        #if(receive_msg[-1].text or self.error_cnt=<error_max):
