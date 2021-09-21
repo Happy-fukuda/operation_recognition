@@ -8,8 +8,10 @@ project(operation_recognition)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
-  gestd_msgs
+  std_msgs
   rospy
+  message_generation
+  visualization_msgs
 )
 
 ## System dependencies are found with CMake's conventions
