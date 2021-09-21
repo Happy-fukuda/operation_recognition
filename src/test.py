@@ -47,6 +47,6 @@ class ShakeHandRecognition():
        if(not receive_msg[-1].text):
            self.error_cnt=0
 
-       if(receive_msg[-1].text or self.error_cnt=<error_max):
-           self.error_cnt+=1
+       #if(receive_msg[-1].text or self.error_cnt=<error_max):
+        #   self.error_cnt+=1
           # if(receive_msg[1][0].points.y>)
