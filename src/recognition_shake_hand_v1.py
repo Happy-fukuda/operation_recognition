@@ -8,26 +8,27 @@
 
 import rospy
 import time
-from visualization_msgs.msg import Marker, MarkerArray
+from ros_openpose.msg import AltMarker, AltMarkerArray
 
 
 #保存するデータの制限(１回/publish)
 max_angle_data=20
 #人の1idが認識できない許容回数
 error_max=3
+
 class ShakeHandRecognition():
-   def __init__(self):
-       #Subscriber
-       rospy.Subscriber('/visualization', MarkerArray, self.shakeRecognision)
-       self.flag = False
-       self.hand_pos={}
-       self.error_cnt=error_max+1
-       self.shake_person=int()
+    def __init__(self):
+        rospy.init_node("test_openpose",anonymous=False)
+        #Subscriber
+        rospy.Subscriber('/visualization', MarkerArray, self.shakeRecognision)
+        self.flag = False
+        self.hand_pos={}
+        self.error_cnt=error_max+1
+        self.shake_person=int()
 
-
-   def shakeRecognision(self,receive_msg):
-       #0body 1hand 2legs
-       '''
+    def shakeRecognision(self,receive_msg):
+        #0body 1hand 2legs
+        '''
             { 0,      "Nose"},    {13,      "LKnee"}
             { 1,      "Neck"},    {14,     "LAnkle"}
             { 2, "RShoulder"},    {15,       "REye"}
@@ -43,10 +44,9 @@ class ShakeHandRecognition():
             {12,      "LHip"},    {25, "Background"}
         hands_ids = [4, 3, 2, 1, 5, 6, 7]
         '''
-       print(receive_msg[1])
-       if(not receive_msg[-1].text):
-           self.error_cnt=0
+        checkParts=lambda x,ls:x in ls
+        if(receive_msg.markers[].text):
+           if(all([checkParts(x,receive_msg.markers[1]) for x in [4,3,2])):
+               self.hand_pos.setdefault(receive_msg.markers[-1].text,[])
 
-       if(receive_msg[-1].text or self.error_cnt=<error_max):
-           self.error_cnt+=1
-           if(receive_msg[1][0].points.y>)
+        else:

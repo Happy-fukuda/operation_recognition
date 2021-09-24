@@ -12,7 +12,7 @@ from visualization_msgs.msg import Marker, MarkerArray
 
 
 #保存するデータの制限(１回/publish)
-max_angle_data=20
+max_motion_data=20
 #人の1idが認識できない許容回数
 error_max=3
 class ShakeHandRecognition():
@@ -44,11 +44,15 @@ class ShakeHandRecognition():
             {12,      "LHip"},    {25, "Background"}
         hands_ids = [4, 3, 2, 1, 5, 6, 7]
         '''
-       print(receive_msg.markers[1].points)
-       print(len(receive_msg.markers[1].points))
-    # if(not receive_msg[-1].text):
-       #    self.error_cnt=0
 
-       #if(receive_msg[-1].text or self.error_cnt=<error_max):
-        #   self.error_cnt+=1
-          # if(receive_msg[1][0].points.y>)
+       if(receive_msg.markers[-1].text):
+           self.error_cnt=0
+       else:
+           self.error_cnt+=1
+
+
+       if(receive_msg[-1].text or self.error_cnt=<error_max):
+           self.error_cnt+=1
+           if(receive_msg[1][0].points.y>)
+
+       else:
