@@ -57,6 +57,7 @@ class ShakeHandRecognition():
                 if(len(self.hand_pos[data.text])>=max_angle_data):
                     self.hand_pos[data.text].pop(0)
         '''
+        print([i.text for i in receive_msg.markers if i.text])
         data_len=len(receive_msg.markers)
         receive_msg=receive_msg.markers
         cnt=1
@@ -66,18 +67,9 @@ class ShakeHandRecognition():
             if(all([i in receive_msg[cnt*2].body_part for i in [4,2]])):
                 if(receive_msg[cnt*2].points[receive_msg[cnt*2].body_part.index(4)].y>=receive_msg[cnt*2].points[receive_msg[cnt*2].body_part.index(2)].y):
                     hand_up=True
-                
+
             elif(all([i in receive_msg[cnt*2].body_part for i in [5,7]])):
                 if(receive_msg[cnt*2].points[receive_msg[cnt*2].body_part.index(7)].y>=receive_msg[cnt*2].points[receive_msg[cnt*2].body_part.index(5)].y):
                     hand_up=True
-            self.hand_pos.setdefault(receive_msg[])
-
-
-
-            
-
-
-        
-        
-
-                
+            self.hand_pos[receive_msg[cnt*data_h].text]=hand_up
+            cnt+=1
