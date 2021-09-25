@@ -63,7 +63,7 @@ class ShakeHandRecognition():
         cnt=1
         hand_up=False
         #手を上げているかいないか
-        while 0=<data_len:
+        while 0<=data_len:
             hand_up=False
             if(receive_msg[data_len].text):
                 if(all([str(i) in receive_msg[data_len-2].body_part for i in [4,2]])):
