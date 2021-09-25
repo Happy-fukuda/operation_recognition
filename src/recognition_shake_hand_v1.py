@@ -71,6 +71,6 @@ class ShakeHandRecognition():
             elif(all([str(i) in receive_msg[cnt*2].body_part for i in [5,7]])):
                 if(receive_msg[cnt*2].points[receive_msg[cnt*2].body_part.index(7)].y>=receive_msg[cnt*2].points[receive_msg[cnt*2].body_part.index(5)].y):
                     hand_up=True
-            for num in range(cnt*2:cnt*data_h+1):
+            for num in range(cnt*2,cnt*data_h+1):
                 if receive_msg[num].text:
                     self.hand_pos[receive_msg[num].text]=hand_up
