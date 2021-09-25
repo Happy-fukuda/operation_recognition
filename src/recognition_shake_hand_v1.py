@@ -70,13 +70,11 @@ class ShakeHandRecognition():
                 #human_ls.append(receive_msg[data_len].text)
                 #print(type(receive_msg[data_len-2].body_part[0]))
                 if(all([i in receive_msg[data_len-2].body_part for i in [4,2]])):
-                    print("4:"+str(receive_msg[data_len-2].points[receive_msg[data_len-2].body_part.index(4)].y))
-                    print("2:"+str(receive_msg[data_len-2].points[receive_msg[data_len-2].body_part.index(4)].y))
-                    if(receive_msg[data_len-2].points[receive_msg[data_len-2].body_part.index(4)].y>=receive_msg[data_len-2].points[receive_msg[data_len-2].body_part.index(2)].y):
+                    if(receive_msg[data_len-2].points[receive_msg[data_len-2].body_part.index(4)].y<=receive_msg[data_len-2].points[receive_msg[data_len-2].body_part.index(2)].y):
                         hand_up=True
 
                 elif(all([i in receive_msg[data_len-2].body_part for i in [5,7]])):
-                    if(receive_msg[data_len-2].points[receive_msg[data_len-2].body_part.index(7)].y>=receive_msg[data_len-2].points[receive_msg[data_len-2].body_part.index(5)].y):
+                    if(receive_msg[data_len-2].points[receive_msg[data_len-2].body_part.index(7)].y<=receive_msg[data_len-2].points[receive_msg[data_len-2].body_part.index(5)].y):
                         hand_up=True
                 human_pos[receive_msg[data_len].text]=hand_up
                 data_len-=4
