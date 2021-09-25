@@ -58,20 +58,26 @@ class ShakeHandRecognition():
                     self.hand_pos[data.text].pop(0)
         '''
         print([i.text for i in receive_msg.markers])
-        data_len=len(receive_msg.markers)
+        data_len=len(receive_msg.markers)-1
         receive_msg=receive_msg.markers
         cnt=1
         hand_up=False
         #手を上げているかいないか
-        while cnt*data_h<data_len:
-            if(all([str(i) in receive_msg[cnt*2].body_part for i in [4,2]])):
-                if(receive_msg[cnt*2].points[receive_msg[cnt*2].body_part.index(4)].y>=receive_msg[cnt*2].points[receive_msg[cnt*2].body_part.index(2)].y):
-                    hand_up=True
+        while 0=<data_len:
+            hand_up=False
+            if(receive_msg[data_len].text):
+                if(all([str(i) in receive_msg[data_len-2].body_part for i in [4,2]])):
+                    print("4:"+str(receive_msg[data_len-2].points[receive_msg[data_len-2].body_part.index(4)].y))
+                    print("2:"+str(receive_msg[data_len-2].points[receive_msg[data_len-2].body_part.index(4)].y))
+                    if(receive_msg[data_len-2].points[receive_msg[data_len-2].body_part.index(4)].y>=receive_msg[data_len-2].points[receive_msg[data_len-2].body_part.index(2)].y):
+                        hand_up=True
 
-            elif(all([str(i) in receive_msg[cnt*2].body_part for i in [5,7]])):
-                if(receive_msg[cnt*2].points[receive_msg[cnt*2].body_part.index(7)].y>=receive_msg[cnt*2].points[receive_msg[cnt*2].body_part.index(5)].y):
-                    hand_up=True
-            for num in range(cnt*2,cnt*data_h+1):
-                if receive_msg[num].text:
-                    self.hand_pos[receive_msg[num].text]=hand_up
-            print(self.hand_pos)
+                elif(all([str(i) in receive_msg[data_len-2].body_part for i in [5,7]])):
+                    if(receive_msg[data_len-2].points[receive_msg[data_len-2].body_part.index(7)].y>=receive_msg[data_len-2].points[receive_msg[data_len-2].body_part.index(5)].y):
+                        hand_up=True
+                self.hand_pos[receive_msg[data_len].text]=hand_up
+                data_len-=4
+            else:
+                data_len-=3
+
+        print(self.hand_pos)
