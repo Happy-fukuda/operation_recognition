@@ -66,13 +66,13 @@ class ShakeHandRecognition():
         while 0<=data_len:
             hand_up=False
             if(receive_msg[data_len].text):
-                if(all([str(i) in receive_msg[data_len-2].body_part for i in [4,2]])):
+                if(all([i in list(map(int,receive_msg[data_len-2].body_part)) for i in [4,2]])):
                     print("4:"+str(receive_msg[data_len-2].points[receive_msg[data_len-2].body_part.index(4)].y))
                     print("2:"+str(receive_msg[data_len-2].points[receive_msg[data_len-2].body_part.index(4)].y))
                     if(receive_msg[data_len-2].points[receive_msg[data_len-2].body_part.index(4)].y>=receive_msg[data_len-2].points[receive_msg[data_len-2].body_part.index(2)].y):
                         hand_up=True
 
-                elif(all([str(i) in receive_msg[data_len-2].body_part for i in [5,7]])):
+                elif(all([i in list(map(int,receive_msg[data_len-2].body_part for i in [5,7]])))):
                     if(receive_msg[data_len-2].points[receive_msg[data_len-2].body_part.index(7)].y>=receive_msg[data_len-2].points[receive_msg[data_len-2].body_part.index(5)].y):
                         hand_up=True
                 self.hand_pos[receive_msg[data_len].text]=hand_up
