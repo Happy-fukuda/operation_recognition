@@ -20,9 +20,9 @@ error_max=3
 data_h=3
 class ShakeHandRecognition():
     def __init__(self):
-        rospy.init_node("test_openpose",anonymous=False)
+        rospy.init_node("rec_openpose",anonymous=False)
         #Subscriber
-        rospy.Subscriber('/visualization', MarkerArray, self.shakeRecognision)
+        rospy.Subscriber('/visualization', AltMarkerArray, self.shakeRecognision)
         self.flag = False
         self.hand_pos={}
         self.error_cnt=error_max+1
