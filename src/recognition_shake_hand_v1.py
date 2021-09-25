@@ -74,3 +74,4 @@ class ShakeHandRecognition():
             for num in range(cnt*2,cnt*data_h+1):
                 if receive_msg[num].text:
                     self.hand_pos[receive_msg[num].text]=hand_up
+        print(self.hand_pos)
