@@ -21,6 +21,7 @@ data_h=3
 class ShakeHandRecognition():
     def __init__(self):
         rospy.init_node("rec_openpose",anonymous=False)
+        self.pub = rospy.Publisher("/rec_openpose", MarkerArray)
         #Subscriber
         rospy.Subscriber('/visualization', AltMarkerArray, self.shakeRecognision)
         self.flag = False
@@ -45,17 +46,6 @@ class ShakeHandRecognition():
             {11,    "RAnkle"},    {24,      "RHeel"}
             {12,      "LHip"},    {25, "Background"}
         hands_ids = [4, 3, 2, 1, 5, 6, 7]
-        '''
-        '''
-        checkParts=lambda x,ls:x in ls
-        person_data=[]
-        for data in receive_msg.markers:
-            if(not data.text):
-                person_data.append(data)
-            else:
-                human_pos.setdefault(data.text,[]).append(person_data)
-                if(len(human_pos[data.text])>=max_angle_data):
-                    human_pos[data.text].pop(0)
         '''
         print([i.text for i in receive_msg.markers])
         data_len=len(receive_msg.markers)-1
