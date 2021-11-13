@@ -21,8 +21,8 @@ error_max=3
 data_h=3
 class ShakeHandRecognition():
     def __init__(self):
-        rospy.init_node("rec_openpose",anonymous=False)
-        self.pub = rospy.Publisher("/rec_openpose", String)
+        rospy.init_node("left_right_recognition",anonymous=False)
+        self.pub = rospy.Publisher("/left_right_recognition", String)
         #Subscriber
         rospy.Subscriber('/visualization', AltMarkerArray, self.shakeRecognision)
         self.flag = False
@@ -53,27 +53,37 @@ class ShakeHandRecognition():
         data_len=len(receive_msg.markers)-1
         receive_msg=receive_msg.markers
         cnt=1
-        hand_up=False
+
         human_pos={}
         #手を上げているかいないか
         while 0<=data_len:
-            hand_up=False
+            direction=""
             if(receive_msg[data_len].text):
                 #human_ls.append(receive_msg[data_len].text)
                 #print(type(receive_msg[data_len-2].body_part[0]))
-                if(all([i in receive_msg[data_len-2].body_part for i in [4,2]])):
-                    if(receive_msg[data_len-2].points[receive_msg[data_len-2].body_part.index(4)].y<=receive_msg[data_len-2].points[receive_msg[data_len-2].body_part.index(2)].y):
-                        hand_up=True
+                #yは下のほうが+
+                if(all([i in receive_msg[data_len-2].body_part for i in [4,3,7,6]])):
+                    if(receive_msg[data_len-2].points[receive_msg[data_len-2].body_part.index(4)].y<=receive_msg[data_len-2].points[receive_msg[data_len-2].body_part.index(7)].y):
+                        if (receive_msg[data_len-2].points[receive_msg[data_len-2].body_part.index(4)].x<=receive_msg[data_len-2].points[receive_msg[data_len-2].body_part.index(3)].x):
+                            human_pos[receive_msg[data_len].text]="left"
+                        else:
+                            human_pos[receive_msg[data_len].text]="right"
 
-                elif(all([i in receive_msg[data_len-2].body_part for i in [5,7]])):
-                    if(receive_msg[data_len-2].points[receive_msg[data_len-2].body_part.index(7)].y<=receive_msg[data_len-2].points[receive_msg[data_len-2].body_part.index(5)].y):
-                        hand_up=True
-                human_pos[receive_msg[data_len].text]=hand_up
+                    else:
+                        if (receive_msg[data_len-2].points[receive_msg[data_len-2].body_part.index(7)].x<=receive_msg[data_len-2].points[receive_msg[data_len-2].body_part.index(6)].x):
+                            human_pos[receive_msg[data_len].text]="right"
+                        else:
+                            human_pos[receive_msg[data_len].text]="left"
+                else:
+                    human_pos[receive_msg[data_len].text]="False"
                 #data_len-=4
                 data_len-=self.body_parts
             else:
                 #data_len-=3
                 data_len-=(self.body_parts-1)
 
+        for k,v in human_pos.items():
+            self.pub(k+":"+v)
+            print(k+":"+v)
         #self.pub(human_pos)
-        print(human_pos)
+        #print(human_pos)
