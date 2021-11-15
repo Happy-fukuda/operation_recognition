@@ -22,7 +22,7 @@ data_h=3
 class ShakeHandRecognition():
     def __init__(self):
         rospy.init_node("left_right_recognition",anonymous=False)
-        self.pub = rospy.Publisher("/left_right_recognition", String)
+        self.pub = rospy.Publisher("/left_right_recognition", String,queue_size=1)
         #Subscriber
         rospy.Subscriber('/visualization', AltMarkerArray, self.shakeRecognision)
         self.flag = False
