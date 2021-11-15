@@ -1,0 +1,4 @@
+# use image data
+./build/examples/openpose/openpose.bin --image_dir examples/media/
+# output keypoints on JSON files
+--write_json {PATH}
