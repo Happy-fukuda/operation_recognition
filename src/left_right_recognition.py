@@ -50,7 +50,7 @@ class ShakeHandRecognition():
             {12,      "LHip"},    {25, "Background"}
         hands_ids = [4, 3, 2, 1, 5, 6, 7]
         '''
-        print([i.text for i in receive_msg.markers])
+        #print([i.text for i in receive_msg.markers])
         data_len=len(receive_msg.markers)-1
         receive_msg=receive_msg.markers
         cnt=1
@@ -63,7 +63,8 @@ class ShakeHandRecognition():
                 #human_ls.append(receive_msg[data_len].text)
                 #print(type(receive_msg[data_len-2].body_part[0]))
                 #yは下のほうが+
-                if(all([i in receive_msg[data_len-2].body_part for i in [4,3,7,6]])):
+                #print(receive_msg[data_len-2].body_part)
+                if(all([i in receive_msg[data_len-2].body_part for i in ['4','3','7','6']])):
                     if(receive_msg[data_len-2].points[receive_msg[data_len-2].body_part.index(4)].y<=receive_msg[data_len-2].points[receive_msg[data_len-2].body_part.index(7)].y):
                         if (receive_msg[data_len-2].points[receive_msg[data_len-2].body_part.index(4)].x<=receive_msg[data_len-2].points[receive_msg[data_len-2].body_part.index(3)].x):
                             human_pos[receive_msg[data_len].text]="left"
