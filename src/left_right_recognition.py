@@ -50,7 +50,7 @@ class ShakeHandRecognition():
             {12,      "LHip"},    {25, "Background"}
         hands_ids = [4, 3, 2, 1, 5, 6, 7]
         '''
-        #print([i.text for i in receive_msg.markers])
+        print([i.body_part for i in receive_msg.markers])
         data_len=len(receive_msg.markers)-1
         receive_msg=receive_msg.markers
         cnt=1
@@ -85,7 +85,7 @@ class ShakeHandRecognition():
                 data_len-=(self.body_parts-1)
 
         for k,v in human_pos.items():
-            #self.pub(k+":"+v)
+            self.pub(k+":"+v)
             print(k+":"+v)
         #self.pub(human_pos)
         #print(human_pos)
