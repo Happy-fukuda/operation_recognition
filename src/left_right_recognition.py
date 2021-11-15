@@ -30,6 +30,7 @@ class ShakeHandRecognition():
         self.body_parts=4+10 #id、上半身、下半身、腕＋指x10
         self.error_cnt=error_max+1
         self.shake_person=int()
+        rospy.spin()
 
     def shakeRecognision(self,receive_msg):
         #0body 1hand 2legs
@@ -87,3 +88,6 @@ class ShakeHandRecognition():
             print(k+":"+v)
         #self.pub(human_pos)
         #print(human_pos)
+
+if __name__=="__main__":
+    ShakeHandRecognition()
