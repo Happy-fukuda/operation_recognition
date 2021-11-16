@@ -86,7 +86,7 @@ class ShakeHandRecognition():
                 data_len-=(self.body_parts-1)
 
         for k,v in human_pos.items():
-            print(type(k))
+            #print(type(k))
             self.pub.publish(k+":"+v)
             rospy.loginfo(k+":"+v)
         #self.pub(human_pos)
