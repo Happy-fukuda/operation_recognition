@@ -30,7 +30,7 @@ class ShakeHandRecognition():
         self.body_parts=4+10 #id、上半身、下半身、腕＋指x10
         self.error_cnt=error_max+1
         self.shake_person=int()
-        rospy.spin()
+        r = rospy.Rate(10)
 
     def shakeRecognision(self,receive_msg):
         #0body 1hand 2legs
@@ -63,9 +63,10 @@ class ShakeHandRecognition():
                 #human_ls.append(receive_msg[data_len].text)
                 #print(type(receive_msg[data_len-2].body_part[0]))
                 #yは下のほうが+
-                #print(receive_msg[data_len-2].body_part)
+                print(receive_msg[data_len-2].body_part)
                 if(all([i in receive_msg[data_len-2].body_part for i in ['4','3','7','6']])):
-                    if(receive_msg[data_len-2].points[receive_msg[data_len-2].body_part.index('4')].y<=receive_msg[data_len-2].points[receive_msg[data_len-2].body_part.index('7')].y):
+
+                    if(receive_msg[data_len-2].points[receive_msg[data_len-2].body_part.index('4')].x<=receive_msg[data_len-2].points[receive_msg[data_len-2].body_part.index('7')].x):
                         if (receive_msg[data_len-2].points[receive_msg[data_len-2].body_part.index('4')].x<=receive_msg[data_len-2].points[receive_msg[data_len-2].body_part.index('3')].x):
                             human_pos[receive_msg[data_len].text]="left"
                         else:
@@ -86,7 +87,7 @@ class ShakeHandRecognition():
 
         for k,v in human_pos.items():
             #self.pub(k+":"+v)
-            print(k+":"+v)
+            rospy.loginfo(k+":"+v)
         #self.pub(human_pos)
         #print(human_pos)
 
