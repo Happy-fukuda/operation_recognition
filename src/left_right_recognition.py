@@ -87,7 +87,7 @@ class ShakeHandRecognition():
 
         for k,v in human_pos.items():
             print(type(k))
-            self.pub(k+":"+v)
+            self.pub.publish(k+":"+v)
             rospy.loginfo(k+":"+v)
         #self.pub(human_pos)
         #print(human_pos)
