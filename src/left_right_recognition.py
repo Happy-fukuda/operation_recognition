@@ -73,7 +73,7 @@ class ShakeHandRecognition():
                             human_pos[receive_msg[data_len].text]="right"
 
                     else:
-                        if (receive_msg[data_len-2].points[receive_msg[data_len-2].body_part.index(7)].x>=receive_msg[data_len-2].points[receive_msg[data_len-2].body_part.index(6)].x):
+                        if (receive_msg[data_len-2].points[receive_msg[data_len-2].body_part.index(7)].x<=receive_msg[data_len-2].points[receive_msg[data_len-2].body_part.index(6)].x):
                             human_pos[receive_msg[data_len].text]="right"
                         else:
                             human_pos[receive_msg[data_len].text]="left"
