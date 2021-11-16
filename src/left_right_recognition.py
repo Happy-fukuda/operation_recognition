@@ -64,16 +64,16 @@ class ShakeHandRecognition():
                 #print(type(receive_msg[data_len-2].body_part[0]))
                 #yは下のほうが+
                 print(receive_msg[data_len-2].body_part)
-                if(all([i in receive_msg[data_len-2].body_part for i in ['4','3','7','6']])):
+                if(all([i in receive_msg[data_len-2].body_part for i in [4,3,7,6]])):
 
-                    if(receive_msg[data_len-2].points[receive_msg[data_len-2].body_part.index('4')].x<=receive_msg[data_len-2].points[receive_msg[data_len-2].body_part.index('7')].x):
-                        if (receive_msg[data_len-2].points[receive_msg[data_len-2].body_part.index('4')].x<=receive_msg[data_len-2].points[receive_msg[data_len-2].body_part.index('3')].x):
+                    if(receive_msg[data_len-2].points[receive_msg[data_len-2].body_part.index(4)].x<=receive_msg[data_len-2].points[receive_msg[data_len-2].body_part.index(7)].x):
+                        if (receive_msg[data_len-2].points[receive_msg[data_len-2].body_part.index(4)].x<=receive_msg[data_len-2].points[receive_msg[data_len-2].body_part.index(3)].x):
                             human_pos[receive_msg[data_len].text]="left"
                         else:
                             human_pos[receive_msg[data_len].text]="right"
 
                     else:
-                        if (receive_msg[data_len-2].points[receive_msg[data_len-2].body_part.index('7')].x<=receive_msg[data_len-2].points[receive_msg[data_len-2].body_part.index('6')].x):
+                        if (receive_msg[data_len-2].points[receive_msg[data_len-2].body_part.index(7)].x<=receive_msg[data_len-2].points[receive_msg[data_len-2].body_part.index(6)].x):
                             human_pos[receive_msg[data_len].text]="right"
                         else:
                             human_pos[receive_msg[data_len].text]="left"
