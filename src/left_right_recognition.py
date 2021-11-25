@@ -12,7 +12,7 @@ import rospy
 import time
 from ros_openpose.msg import AltMarker, AltMarkerArray
 from std_msgs.msg import String
-
+from happymimi_recognition_msgs.srv from PositionEstimator
 #保存するデータの制限(１回/publish)
 max_angle_data=10
 #人の1idが認識できない許容回数
@@ -26,6 +26,7 @@ class ShakeHandRecognition():
         #Subscriber
         rospy.Subscriber('/visualization', AltMarkerArray, self.shakeRecognision)
         self.flag = False
+        self.realsence=rospy.ServiceProxy('/detect/depth',PositionEstimator)
         #human_pos={}
         self.body_parts=4+10 #id、上半身、下半身、腕＋指x10
         self.error_cnt=error_max+1
@@ -60,6 +61,7 @@ class ShakeHandRecognition():
         while 0<=data_len:
             direction=""
             if(receive_msg[data_len].text):
+                print(receive_msg[data_len].pose.position)
                 #human_ls.append(receive_msg[data_len].text)
                 #print(type(receive_msg[data_len-2].body_part[0]))
                 #yは下のほうが+

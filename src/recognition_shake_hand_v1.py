@@ -78,7 +78,7 @@ class ShakeHandRecognition():
 
         #self.pub(human_pos)
         for k,v in human_pos.items():
-            self.pub.publish(k+":"+v)
+            self.pub.publish(k+":"+str(v)
 
 if __name__=="__main__":
     ShakeHandRecognition()
