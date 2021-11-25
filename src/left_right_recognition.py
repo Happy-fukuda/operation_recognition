@@ -55,13 +55,13 @@ class ShakeHandRecognition():
         data_len=len(receive_msg.markers)-1
         receive_msg=receive_msg.markers
         cnt=1
-
-        human_pos={}
+        distance=10
+        human_pos=""
         #手を上げているかいないか
         while 0<=data_len:
             direction=""
-            if(receive_msg[data_len].text):
-                print(receive_msg[data_len].pose.position)
+            if(receive_msg[data_len].text and receive_msg[data_len].pose.position.z<distance):
+                distance=receive_msg[data_len].pose.position.z
                 #human_ls.append(receive_msg[data_len].text)
                 #print(type(receive_msg[data_len-2].body_part[0]))
                 #yは下のほうが+
@@ -87,10 +87,9 @@ class ShakeHandRecognition():
                 #data_len-=3
                 data_len-=(self.body_parts-1)
 
-        for k,v in human_pos.items():
-            #print(type(k))
-            self.pub.publish(k+":"+v)
-            rospy.loginfo(k+":"+v)
+
+        self.pub.publish("1:"+human_pos)
+        rospy.loginfo("1:"+human_pos)
         #self.pub(human_pos)
         #print(human_pos)
 
